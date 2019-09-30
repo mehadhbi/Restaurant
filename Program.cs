@@ -1,6 +1,5 @@
 ﻿using ResturantX.Domian;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using static System.Console;
 
@@ -28,7 +27,6 @@ namespace Restaurant
                 {
                     case ConsoleKey.D1:
 
-
                         Write("Dish: ");
 
                         string dish = ReadLine();
@@ -37,11 +35,10 @@ namespace Restaurant
 
                         string table = ReadLine();
 
-                        Order order = new Order(dish, table);
+                        Order newOrder = new Order(dish, table);
 
-                        restaurant.RegisterOrder(order);
-
-
+                        restaurant.RegisterOrder(newOrder);
+                        
                         Clear();
 
                         WriteLine("Order registered");
@@ -50,8 +47,24 @@ namespace Restaurant
 
                         break;
 
+                    case ConsoleKey.D2:
+
+                        WriteLine("Table    Dish                         Registered");
+                        WriteLine("-------------------------------------------------");
+
+                        foreach (Order order in restaurant.orderQueue)
+                        {
+                            WriteLine($"{order.Table}   {order.Dish}        {order.RegisteredAt}");
+                        }
+
+                        WriteLine();
+                        WriteLine("Press key to continue");
+
+                        ReadKey();
+
+                        break;
+
                     case ConsoleKey.D3:
-                    case ConsoleKey.NumPad3:
 
                         shouldNotExit = false;
 
